@@ -27,5 +27,3 @@ class MultiOfferProduct(Product):
                 if i >= offer_qty:
                     dp[i] = min(dp[i], dp[i - offer_qty] + offer_price)
         return dp[qty]
-
-
