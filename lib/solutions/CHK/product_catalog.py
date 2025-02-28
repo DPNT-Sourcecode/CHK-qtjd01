@@ -21,14 +21,15 @@ PRODUCT_CATALOG = {
     'P': Product('P', 50, 5, 200),
     'Q': Product('Q', 30, 3, 80),
     'R': Product('R', 50),
-    'S': Product('S', 30),
+    'S': Product('S', 20),
     'T': Product('T', 20),
     'U': Product('U', 40, 4, 120),
     'V': MultiOfferProduct('V', 50, [(2, 90), (3, 130)]),
     'W': Product('W', 20),
-    'X': Product('X', 90),
-    'Y': Product('Y', 10),
-    'Z': Product('Z', 50)
+    'X': Product('X', 17),
+    'Y': Product('Y', 20),
+    'Z': Product('Z', 21)
 }
+
 
 
