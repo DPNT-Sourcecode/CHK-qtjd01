@@ -11,3 +11,20 @@ class Product:
             remaining = qty % self.special_qty
             return nums_specials * self.special_price + remaining * self.price
         return qty * self.price
+
+
+class MultiOfferProduct(Product):
+    def __init__(self, sku: str, price: int, offers: list):
+        super().__init__(sku, price, price)
+        self.offers = offers
+
+    def calculate_price(self, qty: int) -> int:
+        dp = [float('inf')] * (qty + 1)
+        dp[0] = 0
+        for i in range(1, qty + 1):
+            dp[i] = dp[i - 1] + self.price
+            for offer_qty, offer_price in self.offers:
+                if i >= offer_qty:
+                    dp[i] = min(dp[i], dp[i - offer_qty] + offer_price)
+        return dp[qty]
+
