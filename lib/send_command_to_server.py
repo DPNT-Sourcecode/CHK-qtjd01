@@ -62,7 +62,7 @@ runner = QueueBasedImplementationRunnerBuilder()\
     .with_solution_for('array_sum', array_sum.compute)\
     .with_solution_for('int_range', int_range.generate)\
     .with_solution_for('fizz_buzz', fizz_buzz_solution.fizz_buzz)\
-    .with_solution_for('checkout', lambda args: checkout_solution.Checkout.calculate_total(args[0]))\
+    .with_solution_for('checkout', checkout_solution.checkout)\
     .with_solution_for('checklite', checklite_solution.checklite)\
     .create()
 
@@ -71,5 +71,6 @@ ChallengeSession\
     .with_config(Utils.get_config())\
     .with_action_provider(lambda: get_user_input(sys.argv[1:]))\
     .start()
+
 
 
