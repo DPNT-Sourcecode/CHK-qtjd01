@@ -16,6 +16,7 @@ class Checkout:
             'C': Product('C', 20),
             'D': Product('D', 15),
             'E': Product('E', 40),
+            'F': Product('F', 10, 3, 20)
         }
 
     def calculate_total(self, skus: str) -> int:
@@ -56,5 +57,6 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
+
 
 
