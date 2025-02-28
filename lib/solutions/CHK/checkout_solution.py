@@ -42,7 +42,15 @@ class Checkout:
         return total
 
 
-def checkout(skus: str) -> int:
+def checkout(arg) -> int:
+    if isinstance(arg, list):
+        skus = arg[0] if arg else ''
+    elif isinstance(arg, str):
+        skus = arg
+    else:
+        skus = str(arg)
+
     return Checkout().calculate_total(skus)
+
 
 
