@@ -13,5 +13,3 @@ class BasketModel(BaseModel):
             if ch not in ALLOWED_SKUS:
                 raise ValueError(f'Invalid sku {ch}')
         return value
-
-
