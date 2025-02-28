@@ -7,5 +7,3 @@ logger = get_logger(__name__)
 # skus = unicode string
 def checkout(skus):
     pass
-
-

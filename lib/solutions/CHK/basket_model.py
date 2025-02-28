@@ -1,10 +1,15 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
+
 
 class BasketModel(BaseModel):
-    basket: str
+    skus: str
 
-    @validator('basket')
-    def check_basket(cls, value):
-        if not all([x.isalpha() for x in value]):
-            raise ValueError("Basket should contain only alphabets")
+    @field_validator("skus")
+    def validate_skus(cls, value: str) -> str:
+        allowed = {'A', 'B', 'C', 'D'}
+        if not isinstance(value, str):
+            raise ValueError('skus must be a string')
+        for ch in value:
+            if ch not in allowed:
+                raise ValueError(f'Invalid sku {ch}')
         return value

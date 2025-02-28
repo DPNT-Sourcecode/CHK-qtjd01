@@ -7,5 +7,3 @@ def hello(name: str) -> str:
         raise TypeError(f"Input {name} must be a string")
     return f"Hello, {name}!"
 
-
-
