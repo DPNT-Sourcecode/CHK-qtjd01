@@ -14,7 +14,8 @@ class Checkout:
             'A': MultiOfferProduct('A', 50, [(3, 130), (5, 200)]),
             'B': Product('B', 30, 2, 45),
             'C': Product('C', 20),
-            'D': Product('D', 15)
+            'D': Product('D', 15),
+            'E': Product('E', 40),
         }
 
     def calculate_total(self, skus: str) -> int:
@@ -28,7 +29,9 @@ class Checkout:
         for ch in basket.skus:
             counts[ch] = counts.get(ch, 0) + 1
 
-        free_B = counts.get(
+        free_b = counts.get('E', 0) // 2
+        if 'B' in counts:
+            counts['B'] = max(counts['B'] - free_b, 0)
 
         total = 0
         for sku, qty in counts.items():
@@ -53,4 +56,5 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
+
 
