@@ -23,9 +23,10 @@ class Checkout:
         for ch in basket.skus:
             counts[ch] = counts.get(ch, 0) + 1
 
-        free_b = counts.get('E', 0) // 2
-        if 'B' in counts:
-            counts['B'] = max(counts['B'] - free_b, 0)
+        for free_item, required_item, required_qty in [('B', 'E', 2), ('M', 'N', 3), ('Q', 'R', 3)]:
+            free_count = counts.get(required_item, 0) // required_qty
+            if free_item in counts:
+                counts[free_item] = max(counts[free_item] - free_count, 0)
 
         total = 0
         for sku, qty in counts.items():
@@ -50,4 +51,5 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
+
 
