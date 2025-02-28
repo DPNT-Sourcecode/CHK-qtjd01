@@ -1,5 +1,5 @@
 from logger import get_logger
-from solutions.CHK.products import Product, MultiOfferProduct
+from solutions.CHK.product_catalog import PRODUCT_CATALOG
 from solutions.CHK.basket_model import BasketModel
 from pydantic import ValidationError
 
@@ -10,14 +10,7 @@ logger = get_logger(__name__)
 # skus = unicode string
 class Checkout:
     def __init__(self):
-        self.products = {
-            'A': MultiOfferProduct('A', 50, [(3, 130), (5, 200)]),
-            'B': Product('B', 30, 2, 45),
-            'C': Product('C', 20),
-            'D': Product('D', 15),
-            'E': Product('E', 40),
-            'F': Product('F', 10, 3, 20)
-        }
+        self.products = PRODUCT_CATALOG
 
     def calculate_total(self, skus: str) -> int:
         try:
@@ -57,3 +50,4 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
+
