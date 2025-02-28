@@ -29,6 +29,26 @@ class Checkout:
                 counts[free_item] = max(counts[free_item] - free_count, 0)
 
         total = 0
+
+        group_skus = ['S', 'T', 'X', 'Y', 'Z']
+        group_prices = []
+        for sku in group_skus:
+            if sku in counts:
+                product = self.products.get(sku)
+                for _ in range(counts[sku]):
+                    group_prices.append(product.price)
+                del counts[sku]
+
+        group_total = 0
+
+        if group_prices:
+            group_prices.sort(reverse=True)
+            while len(group_prices) >= 3:
+                group_total += 45
+                group_prices = group_prices[3:]
+            group_total += sum(group_prices)
+        total += group_total
+
         for sku, qty in counts.items():
             product = self.products.get(sku)
             if not product:
@@ -51,3 +71,4 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
+
