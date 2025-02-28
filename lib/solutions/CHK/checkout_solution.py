@@ -6,5 +6,6 @@ logger = get_logger(__name__)
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    
+    pass
+
 
