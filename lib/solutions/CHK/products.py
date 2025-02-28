@@ -15,7 +15,7 @@ class Product:
 
 class MultiOfferProduct(Product):
     def __init__(self, sku: str, price: int, offers: list):
-        super().__init__(sku, price, price)
+        super().__init__(sku, price)
         self.offers = offers
 
     def calculate_price(self, qty: int) -> int:
@@ -27,4 +27,5 @@ class MultiOfferProduct(Product):
                 if i >= offer_qty:
                     dp[i] = min(dp[i], dp[i - offer_qty] + offer_price)
         return dp[qty]
+
 
