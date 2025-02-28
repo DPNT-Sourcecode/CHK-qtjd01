@@ -30,7 +30,7 @@ class Checkout:
 
         total = 0
         for sku, qty in counts.items():
-            product = self.products.get[sku]
+            product = self.products.get(sku)
             if not product:
                 logger.error(f'Invalid sku {sku}')
                 return -1
@@ -51,6 +51,3 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
-
-
-
