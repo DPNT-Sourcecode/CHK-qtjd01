@@ -23,13 +23,14 @@ PRODUCT_CATALOG = {
     'R': Product('R', 50),
     'S': Product('S', 30),
     'T': Product('T', 20),
-    'U': Product('U', 40, 3, 80),
+    'U': Product('U', 40, 4, 120),
     'V': MultiOfferProduct('V', 50, [(2, 90), (3, 130)]),
     'W': Product('W', 20),
     'X': Product('X', 90),
     'Y': Product('Y', 10),
     'Z': Product('Z', 50)
 }
+
 
 
 
