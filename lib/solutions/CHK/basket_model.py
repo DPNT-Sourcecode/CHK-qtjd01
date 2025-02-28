@@ -6,10 +6,12 @@ class BasketModel(BaseModel):
 
     @field_validator("skus")
     def validate_skus(cls, value: str) -> str:
-        allowed = {'A', 'B', 'C', 'D', 'E', 'F'}
+        allowed = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+                   'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
         if not isinstance(value, str):
             raise ValueError('skus must be a string')
         for ch in value:
             if ch not in allowed:
                 raise ValueError(f'Invalid sku {ch}')
         return value
+
