@@ -19,18 +19,31 @@ class Checkout:
             logger.error(f'Invalid skus: {e}')
             return -1
 
-        counts = {}
-        for ch in basket.skus:
-            counts[ch] = counts.get(ch, 0) + 1
+        counts = self._count_skus(basket.skus)
+        counts = self._apply_free_items(counts, [('B', 'E', 2), ('M', 'N', 3), ('Q', 'R', 3)])
+        group_total, counts = self._group_skus(counts, ['S', 'T', 'X', 'Y', 'Z'])
+        remaining_total = self._calculate_remaining_total(counts)
+        if remaining_total < 0:
+            return -1
 
-        for free_item, required_item, required_qty in [('B', 'E', 2), ('M', 'N', 3), ('Q', 'R', 3)]:
+        total = group_total + remaining_total
+        logger.info(f'Total price: {total}')
+        return total
+
+    def _count_skus(self, skus: str) -> dict:
+        counts = {}
+        for ch in skus:
+            counts[ch] = counts.get(ch, 0) + 1
+        return counts
+
+    def _apply_free_items(self, counts: dict, items: list[tuple]) -> dict:
+        for free_item, required_item, required_qty in items:
             free_count = counts.get(required_item, 0) // required_qty
             if free_item in counts:
                 counts[free_item] = max(counts[free_item] - free_count, 0)
+        return counts
 
-        total = 0
-
-        group_skus = ['S', 'T', 'X', 'Y', 'Z']
+    def _group_skus(self, counts: dict, group_skus: list) -> (int, dict):
         group_prices = []
         for sku in group_skus:
             if sku in counts:
@@ -47,18 +60,16 @@ class Checkout:
                 group_total += 45
                 group_prices = group_prices[3:]
             group_total += sum(group_prices)
-        total += group_total
+        return group_total, counts
 
+    def _calculate_remaining_total(self, counts: dict) -> int:
+        total = 0
         for sku, qty in counts.items():
             product = self.products.get(sku)
             if not product:
                 logger.error(f'Invalid sku {sku}')
                 return -1
-            product_total = product.calculate_price(qty)
-            logger.info(f'{sku}: {qty} x {product.price} = {product_total}')
-            total += product_total
-
-        logger.info(f'Total: {total}')
+            total += product.calculate_price(qty)
         return total
 
 
@@ -71,4 +82,5 @@ def checkout(arg) -> int:
         skus = str(arg)
 
     return Checkout().calculate_total(skus)
+
 
