@@ -1,6 +1,6 @@
 from solutions.CHK.products import Product, MultiOfferProduct
 
-ALLOWED_SKUS = set('ABCDEFLMNOPQRSTUVWXYZ')
+ALLOWED_SKUS = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
 PRODUCT_CATALOG = {
     'A': MultiOfferProduct('A', 50, [(3, 130), (5, 200)]),
@@ -30,5 +30,6 @@ PRODUCT_CATALOG = {
     'Y': Product('Y', 10),
     'Z': Product('Z', 50)
 }
+
 
 
