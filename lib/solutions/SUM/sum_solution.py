@@ -5,5 +5,3 @@ def sum_solution(x: int, y: int) -> int:
     if x not in range(0, 100) or y not in range(0, 100):
         raise ValueError("Input out of range")
     return x + y
-
-

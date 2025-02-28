@@ -20,6 +20,3 @@ class TestSum():
         with pytest.raises(ValueError) as excinfo:
             sum_solution.sum_solution(1, 2.0)
         assert "Input not an integer" in str(excinfo.value)
-
-
-
