@@ -1,4 +1,4 @@
-class Products:
+class Product:
     def __init__(self, sku: str, price: int, special_qty: int = None, special_price: int = None):
         self.sku = sku
         self.price = price
